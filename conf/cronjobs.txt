@@ -1,0 +1,15 @@
+# mysqlbup.cron created by josephdpurcell edited by Wayne Theisinger
+#
+# This cron will export tmpdatabase database every day at 4am. Those exports are
+# automatically rotating from md.day0 to md.day6 so you
+# always have a bup of the last 7 days of backups.
+#
+# Also, this cron will export tmpdatabase database every week for the last 4 weeks at
+# 2am on Sunday. Those exports are automatically rotating from
+# tmpdatabase.week0 to tmpdatabase.week3 so you always have a bup of the
+# last 4 weeks of backups.
+#
+# rotating past 7 days mysql bup
+0 4 * * * mysqldump -u tmpdbusername -ptmpdbpassword --single-transaction --quick --lock-tables=false tmpdatabase | gzip -c | ssh -i tmpsshkypath tmpsshuser@tmpsshdomain 'cat > tmpbackuppath/tmpdatabase.day$(date +\%w).sql.gz'
+# rotating past 4 weeks mysql bup
+0 2 * * 0 mysqldump -u tmpdbusername -ptmpdbpassword --single-transaction --quick --lock-tables=false tmpdatabase | gzip -c | ssh -i tmpsshkypath tmpsshuser@tmpsshdomain 'cat > tmpbackuppath/tmpdatabase.week$(expr $(date +\%U) \% 4).sql.gz'
