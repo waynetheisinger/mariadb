@@ -10,6 +10,6 @@
 # last 4 weeks of backups.
 #
 # rotating past 7 days mysql bup
-0 4 * * * mysqldump -u tmpdbusername -ptmpdbpassword --single-transaction --quick --lock-tables=false tmpdatabase | gzip -c | ssh -i tmpsshkypath tmpsshuser@tmpsshdomain 'cat > tmpbackuppath/tmpdatabase.day$(date +\%w).sql.gz'
+0 4 * * * mysqldump -u tmpdbusername -ptmpdbpassword --single-transaction --quick --lock-tables=false tmpdatabase | gzip -c | ssh -i tmpsshkypath tmpsshuser@tmpsshdomain 'cat > tmpbackuppath/tmpdatabase.day$(date +\%w).sql.gz' && curl -fsS --retry 3 tmpdailyhealthcheck > /dev/null
 # rotating past 4 weeks mysql bup
-0 2 * * 0 mysqldump -u tmpdbusername -ptmpdbpassword --single-transaction --quick --lock-tables=false tmpdatabase | gzip -c | ssh -i tmpsshkypath tmpsshuser@tmpsshdomain 'cat > tmpbackuppath/tmpdatabase.week$(expr $(date +\%U) \% 4).sql.gz'
+0 2 * * 0 mysqldump -u tmpdbusername -ptmpdbpassword --single-transaction --quick --lock-tables=false tmpdatabase | gzip -c | ssh -i tmpsshkypath tmpsshuser@tmpsshdomain 'cat > tmpbackuppath/tmpdatabase.week$(expr $(date +\%U) \% 4).sql.gz' && curl -fsS --retry 3 tmpweeklyhealthcheck > /dev/null
