@@ -24,8 +24,8 @@ sed -i "s:tmpsshkypath:${SSH_KEY_PATH}:g" /tmp/cronjobs.txt
 sed -i "s:tmpsshuser:${SSH_USER}:g" /tmp/cronjobs.txt
 sed -i "s:tmpsshdomain:${SSH_DOMAIN}:g" /tmp/cronjobs.txt
 sed -i "s:tmpbackuppath:${BACKUP_PATH}:g" /tmp/cronjobs.txt
-sed -i "s:tmpdailyhealthcheck:${DAILY_HEALTHCHECK}" /tmp/cronjobs.txt
-sed -i "s:tmpweeklyhealthcheck:${WEEKLY_HEALTHCHECK}" /tmp/cronjobs.txt
+sed -i "s:tmpdailyhealthcheck:${DAILY_HEALTHCHECK}:g" /tmp/cronjobs.txt
+sed -i "s:tmpweeklyhealthcheck:${WEEKLY_HEALTHCHECK}:g" /tmp/cronjobs.txt
 crontab -u mysql /tmp/cronjobs.txt
 fi
 
