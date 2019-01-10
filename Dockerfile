@@ -4,6 +4,7 @@ MAINTAINER Wayne Theisinger <wayne@intacart.co.uk>
 RUN apt-get update \
   && apt-get install -y \
     cron \
+    curl \
     openssh-client && \
     apt-get clean
 
