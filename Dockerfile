@@ -13,13 +13,6 @@ RUN apt-get update \
 ARG INSTALL_SCRIPT=placeholder
 ENV INSTALL_SCRIPT="${INSTALL_SCRIPT}"
 
-ARG FILEBEAT_VERSION='5.6.1'
-ENV FILEBEAT_VERSION="${FILEBEAT_VERSION}"
-
-RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-RUN apt-get update && apt-get install filebeat
-RUN update-rc.d filebeat defaults 95 10
-
 COPY conf/config-file.cnf /etc/mysql/conf.d/config-file.cnf
 
 RUN install -d -o mysql -g mysql -m 700 /home/mysql/.ssh/ && \

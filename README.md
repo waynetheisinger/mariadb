@@ -17,7 +17,6 @@ It expects the following Environmental variables to be set:
 - MYSQL_USER
 - MYSQL_DATABASE
 - STAGED_ENVIRONMENT: if this is set to anything other than production the backup won't run
-- FILEBEAT_VERSION: the version of Filebeat to install, Defaults to 5.6.1
 
 And optionally
 
