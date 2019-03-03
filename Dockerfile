@@ -5,6 +5,8 @@ RUN apt-get update \
   && apt-get install -y \
     cron \
     curl \
+    wget \
+    apt-transport-https \
     openssh-client && \
     apt-get clean
 
