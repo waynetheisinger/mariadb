@@ -1,4 +1,5 @@
 [mysqld]
+performance_schema = on
 innodb_buffer_pool_size = 1G
 innodb_thread_concurrency = 18
 innodb_flush_log_at_trx_commit = 2
