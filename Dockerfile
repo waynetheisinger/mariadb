@@ -13,6 +13,16 @@ RUN apt-get update \
 ARG INSTALL_SCRIPT=placeholder
 ENV INSTALL_SCRIPT="${INSTALL_SCRIPT}"
 
+RUN curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.0.1-amd64.deb
+RUN dpkg -i filebeat-7.0.1-amd64.deb
+
+RUN curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.0.1-amd64.deb
+RUN dpkg -i metricbeat-7.0.1-amd64.deb
+
+#copy the configuration
+COPY conf/filebeat.yml /etc/filebeat/filebeat.yml
+COPY conf/metricbeat.yml /etc/metricbeat/metricbeat.yml
+
 COPY conf/config-file.cnf /etc/mysql/conf.d/config-file.cnf
 
 RUN install -d -o mysql -g mysql -m 700 /home/mysql/.ssh/ && \
